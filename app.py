@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from pathlib import Path
 
 # Making the app:
 
@@ -96,9 +97,9 @@ def edit(id):
 @app.route('/posts/new', methods=['GET', 'POST'])
 def new_post():
     if request.method == 'POST':
-        post.title = request.form['title']
-        post.author = request.form['author']
-        post.content = request.form['content']
+        post_title = request.form['title']
+        post_author = request.form['author']
+        post_content = request.form['content']
         new_post = BlogPost(
             title=post_title, content=post_content, author=post_author)
         db.session.add(new_post)
